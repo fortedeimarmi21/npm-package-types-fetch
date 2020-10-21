@@ -22,6 +22,7 @@
   },
   "scripts": {
     "clean": "rimraf coverage build tmp",
+    "start": "npm run build && node build/src/main.js",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx",
@@ -31,7 +32,12 @@
   "author": "Jakub Synowiec <github@jakubsynowiec.info>",
   "license": "Apache-2.0",
   "dependencies": {
-    "tslib": "~2.0.1"
+    "decompress": "^4.2.1",
+    "decompress-targz": "^4.1.1",
+    "node-fetch": "^2.6.1",
+    "tar-stream": "^2.1.4",
+    "tslib": "~2.0.1",
+    "zlib": "^1.0.5"
   },
   "volta": {
     "node": "12.18.3",
