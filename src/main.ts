@@ -1,4 +1,4 @@
-import { getPackageTypes } from "./registry.service";
+// import { getPackageTypes } from "./registry.service";
 
 // example
 // (async () => {
