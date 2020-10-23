@@ -1,6 +1,6 @@
 // import { getPackageTypes } from "./registry.service";
 
-// example
+
 // (async () => {
 //   const types = await getPackageTypes('react', '16.14.0');
 //   console.log('package types', types);
