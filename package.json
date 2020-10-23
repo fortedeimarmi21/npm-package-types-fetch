@@ -1,6 +1,6 @@
 {
   "name": "npm-package-types-fetch",
-  "version": "0.0.11",
+  "version": "0.0.10",
   "description": "fetch type definition files for npm package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
