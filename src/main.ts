@@ -5,16 +5,10 @@ import * as fs from 'fs';
 
 // Or
 
-// (async () => {
-//   const types = await getPackageTypes('react');
-  
-//   fs.writeFile("./files.txt", types[Object.keys(types)[0]], function(err) {
-//     if(err) {
-//         return console.log(err);
-//     }
-//     console.log("The file was saved!");
-// }); 
-// })()
+(async () => {
+  const types = await getPackageTypes('rxjs','6.4.0');
+  console.log(types);
+})()
 
 // examples
 // (async () => {

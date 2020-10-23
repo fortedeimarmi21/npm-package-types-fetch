@@ -61,18 +61,20 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
     ///tbd
   } else {
     // remove package name in from of a file pathname, react/dist/index.d.ts should become dist/index.d.ts
-    const filePaths: string[] = files.filter(file => (file.path as string).endsWith('d.ts')).map(file => file.path.match(/(?<=\w+\/).+/g)[0]);
-    if (filePaths.length < 10) {
+    const typeFiles = files.filter(file => (file.path as string).endsWith('d.ts'));
+    if (typeFiles.length < 10) {
+      const requestFilePaths: string[] = typeFiles.map(file => file.path.match(/(?<=\w+\/).+/g)[0]);
       // Prepeare requests for retreiving types fron unpkg;
-      const fileRequests = filePaths.map(path => createTypeDefFileRequest(packageName, packageVersion, path));
+      const fileRequests = requestFilePaths.map(path => createTypeDefFileRequest(packageName, packageVersion, path));
       const typesResult: any = await Promise.allSettled(fileRequests);
       for (const [i, promiseResult] of typesResult.entries()) {
-        types[filePaths[i]] = promiseResult.value;
+        types[requestFilePaths[i]] = promiseResult.value;
       }
-    } else if (filePaths.length) {
-      for (const [i, file] of files.entries()) {
-        types[filePaths[i]] = file.data?.toString() || ''
-      }
+    } else if (typeFiles.length) {
+      typeFiles.forEach((file, i) => {
+        const fileName = file.path.match(/(?<=\w+\/).+/g)[0];
+        types[fileName] = file.data.toString();
+      });
     }
   }
   return types;
