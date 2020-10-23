@@ -2,13 +2,13 @@
   "name": "npm-package-types-fetch",
   "version": "0.0.8",
   "description": "fetch type definition files for npm package",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "build/src/index.js",
+  "types": "build/src/index.d.ts",
   "engines": {
     "node": ">= 12.13 <13"
   },
   "files": [
-    "dist"
+    "build/src"
   ],
   "repository": {
     "type": "git",
