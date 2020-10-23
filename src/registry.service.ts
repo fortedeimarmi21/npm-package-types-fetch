@@ -48,6 +48,7 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
   const packageMetadata = await fetch(`${NPM_REGISTRY_ENDPOINT}/${packageName}/${packageVersion}`)
     .then(res => res.json())
     .catch(() => ({error: 'not found'}));
+
   if (!packageMetadata.dist) { return {}; }
   const distUrl = packageMetadata.dist.tarball;  
   const response = await fetch(distUrl);
@@ -60,13 +61,17 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
     ///tbd
   } else {
     // remove package name in from of a file pathname, react/dist/index.d.ts should become dist/index.d.ts
-    const filePaths = files.filter(file => (file.path as string).endsWith('d.ts')).map(file => file.path.match(/(?<=\w+\/).+/g)[0]);
-    if (filePaths.length) {
+    const filePaths: string[] = files.filter(file => (file.path as string).endsWith('d.ts')).map(file => file.path.match(/(?<=\w+\/).+/g)[0]);
+    if (filePaths.length < 10) {
       // Prepeare requests for retreiving types fron unpkg;
       const fileRequests = filePaths.map(path => createTypeDefFileRequest(packageName, packageVersion, path));
       const typesResult: any = await Promise.allSettled(fileRequests);
       for (const [i, promiseResult] of typesResult.entries()) {
         types[filePaths[i]] = promiseResult.value;
+      }
+    } else if (filePaths.length) {
+      for (const [i, file] of files.entries()) {
+        types[filePaths[i]] = file.data?.toString() || ''
       }
     }
   }
@@ -74,5 +79,6 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
 }
 
 const createTypeDefFileRequest = (packageName: string, packageVersion: string, filePath: string): any => {
-  return fetch(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`).then(res => res.text());
+  console.log(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`)
+  return fetch(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`).then(res => {console.log('response');res.text()}).catch(err => console.log(err));
 }
