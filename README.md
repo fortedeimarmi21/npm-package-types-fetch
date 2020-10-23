@@ -4,7 +4,6 @@ const types = await getPackageTypes('react', '16.14.0');
 console.log('package types', types); 
 
 ##  Note
-Only for NODEJS
 
 Package version should be specified, support for automatically fetching a latest ver. will be addded in future
 
