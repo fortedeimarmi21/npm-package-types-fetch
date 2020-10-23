@@ -2,7 +2,7 @@
 Use this package to get npm package type files,
 get npm package versions from an API. 
 
-Specify package name and version, or use "*" to get the latest package version;
+Specify package name and version, or just package name to get the latest package ver. types;
 It checks for a package type definition files in a package itself, and if not found checks in @types/{packageName}@{packageVer}. 
 If there is no types available for current ver., types from a last previous version returned;
 
@@ -13,9 +13,6 @@ console.log('package types', types);
 // Get latest npm package version type definition files
 const types = await getPackageTypes('react');
 console.log('package types', types); //
-
-## Note
-package version should be specified, support for automatically fetching a latest ver. will be addded in future;
 
 ## Example
 
