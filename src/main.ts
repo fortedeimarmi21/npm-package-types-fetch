@@ -5,16 +5,16 @@ import * as fs from 'fs';
 
 // Or
 
-(async () => {
-  const types = await getPackageTypes('react');
+// (async () => {
+//   const types = await getPackageTypes('react');
   
-  fs.writeFile("./files.txt", types[Object.keys(types)[0]], function(err) {
-    if(err) {
-        return console.log(err);
-    }
-    console.log("The file was saved!");
-}); 
-})()
+//   fs.writeFile("./files.txt", types[Object.keys(types)[0]], function(err) {
+//     if(err) {
+//         return console.log(err);
+//     }
+//     console.log("The file was saved!");
+// }); 
+// })()
 
 // examples
 // (async () => {
