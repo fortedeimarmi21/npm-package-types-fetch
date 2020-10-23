@@ -1,7 +1,6 @@
+// import { getPackageTypes } from "./registry.service";
 
-// import { getPackageTypes } from 'npm-package-types-fetch/build/src';
-
-//example
+// example
 // (async () => {
 //   const types = await getPackageTypes('react', '16.14.0');
 //   console.log('package types', types);

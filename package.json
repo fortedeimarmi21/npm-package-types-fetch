@@ -1,15 +1,12 @@
 {
-  "name": "npm-package-types-fetch",
-  "version": "0.0.4",
+  "name": "node-typescript-boilerplate",
+  "version": "0.0.0",
   "description": "fetch type definition files for npm package",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">= 12.13 <13"
   },
-  "files": [
-    "build/src"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fortedeimarmi21/npm-package-types-fetch"
@@ -46,7 +43,6 @@
     "decompress": "^4.2.1",
     "decompress-targz": "^4.1.1",
     "node-fetch": "^2.6.1",
-    "npm-package-types-fetch": "0.0.2",
     "tar-stream": "^2.1.4",
     "tslib": "~2.0.1",
     "zlib": "^1.0.5"
