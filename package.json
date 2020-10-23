@@ -1,9 +1,9 @@
 {
   "name": "npm-package-types-fetch",
-  "version": "0.0.8",
+  "version": "0.0.6",
   "description": "fetch type definition files for npm package",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "engines": {
     "node": ">= 12.13 <13"
   },
