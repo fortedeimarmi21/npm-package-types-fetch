@@ -20,14 +20,13 @@ export const getPackageVersions = async (packageName: string): Promise<string[]>
   return versions;
 }
 /** Get a package type definition files of a given package name and version */
-export const getPackageTypes = async (packageName: string, packageVersion = '*', config?: GetPackageTypesConfig): Promise<{[key: string]: string}> => {
+export const getPackageTypes = async (packageName: string, packageVersion = 'latest', config?: GetPackageTypesConfig): Promise<{[key: string]: string}> => {
   let types = {};
   const packageTypes = await retreivePackageTypeFiles(packageName, packageVersion, config);
   if (areTypesAvailable(packageTypes)) {
     types = {...packageTypes};
   } else {
     const definetelyTypedTypes = await retreivePackageTypeFiles(`@types/${packageName}`, packageVersion, config);
-
     if (!areTypesAvailable(definetelyTypedTypes)) {
       const versions = await getPackageVersions(`@types/${packageName}`);
       // try to find previous verison of types
@@ -45,7 +44,7 @@ export const getPackageTypes = async (packageName: string, packageVersion = '*',
 
 const areTypesAvailable = (types) => !!Object.entries(types).length;
 
-const retreivePackageTypeFiles = async (packageName: string, packageVersion = '*', config?: GetPackageTypesConfig) => {
+const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'latest', config?: GetPackageTypesConfig) => {
   const packageMetadata = await fetch(`${NPM_REGISTRY_ENDPOINT}/${packageName}/${packageVersion}`)
     .then(res => res.json())
     .catch(() => ({error: 'not found'}));

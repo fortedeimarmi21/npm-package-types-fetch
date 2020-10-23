@@ -1,10 +1,20 @@
-// import { getPackageTypes } from "./registry.service";
+import { getPackageTypes } from "./registry.service";
+import * as fs from 'fs';
 
 
-// (async () => {
-//   const types = await getPackageTypes('react', '16.14.0');
-//   console.log('package types', types);
-// })()
+
+// Or
+
+(async () => {
+  const types = await getPackageTypes('react');
+  
+  fs.writeFile("./files.txt", types[Object.keys(types)[0]], function(err) {
+    if(err) {
+        return console.log(err);
+    }
+    console.log("The file was saved!");
+}); 
+})()
 
 // examples
 // (async () => {
