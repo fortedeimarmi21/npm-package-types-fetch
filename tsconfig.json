@@ -17,15 +17,15 @@
     "noUnusedParameters": false,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "esModuleInterop": true,
     "strictNullChecks": false,
-    "outDir": "./dist",
+    "outDir": "dist",
     "lib": [
       "ES2020.Promise",
     ]
   },
   "include": [
-    "./src"
+    "src/**/*",
+    "__tests__/**/*"
   ],
   "exclude": ["node_modules", "dist"]
 }
