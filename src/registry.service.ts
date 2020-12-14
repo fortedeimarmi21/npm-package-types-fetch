@@ -23,10 +23,12 @@ export const getPackageVersions = async (packageName: string): Promise<string[]>
 export const getPackageTypes = async (packageName: string, packageVersion = 'latest', config?: GetPackageTypesConfig): Promise<{[key: string]: string}> => {
   let types = {};
   const packageTypes = await retreivePackageTypeFiles(packageName, packageVersion, config);
+
   if (areTypesAvailable(packageTypes)) {
     types = {...packageTypes};
   } else {
     const definetelyTypedTypes = await retreivePackageTypeFiles(`@types/${packageName}`, packageVersion, config);
+
     if (!areTypesAvailable(definetelyTypedTypes)) {
       const versions = await getPackageVersions(`@types/${packageName}`);
       // try to find previous verison of types
@@ -55,7 +57,7 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
 	const buffer = await response.buffer();
   const files = await decompressBuffer(buffer);
 
-  let types = {};
+  const types = {};
 
   if (config?.readFilesDataFromBuffer) {
     ///tbd
@@ -67,6 +69,7 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
       // Prepeare requests for retreiving types fron unpkg;
       const fileRequests = requestFilePaths.map(path => createTypeDefFileRequest(packageName, packageVersion, path));
       const typesResult: any = await Promise.allSettled(fileRequests);
+
       for (const [i, promiseResult] of typesResult.entries()) {
         types[requestFilePaths[i]] = promiseResult.value;
       }
@@ -82,5 +85,7 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
 
 const createTypeDefFileRequest = (packageName: string, packageVersion: string, filePath: string): any => {
   console.log(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`)
-  return fetch(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`).then(res => {console.log('response');res.text()}).catch(err => console.log(err));
+  return fetch(`${UNPKG_ENDPOINT}/${packageName}@${packageVersion}/${filePath}`)
+    .then(res => res.text())
+    .catch(err => console.log(err));
 }

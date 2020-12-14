@@ -6,8 +6,7 @@ import * as fs from 'fs';
 // Or
 
 (async () => {
-  const types = await getPackageTypes('rxjs','6.4.0');
-  console.log(types);
+  const types = await getPackageTypes('react','16.4.0');
 })()
 
 // examples
