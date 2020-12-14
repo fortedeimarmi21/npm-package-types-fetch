@@ -64,7 +64,7 @@ const retreivePackageTypeFiles = async (packageName: string, packageVersion = 'l
   } else {
     // remove package name in from of a file pathname, react/dist/index.d.ts should become dist/index.d.ts
     const typeFiles = files.filter(file => (file.path as string).endsWith('d.ts'));
-    if (typeFiles.length < 10) {
+    if (typeFiles.length < 5) {
       const requestFilePaths: string[] = typeFiles.map(file => file.path.match(/(?<=\w+\/).+/g)[0]);
       // Prepeare requests for retreiving types fron unpkg;
       const fileRequests = requestFilePaths.map(path => createTypeDefFileRequest(packageName, packageVersion, path));
