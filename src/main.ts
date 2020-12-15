@@ -1,12 +1,6 @@
 import { getPackageTypes } from "./registry.service";
-import * as fs from 'fs';
-
-
-
-// Or
-
 (async () => {
-  const types = await getPackageTypes('rxjs','6.6.3');
+  const types = await getPackageTypes('fireworks','2.2.6');
 })()
 
 // examples
